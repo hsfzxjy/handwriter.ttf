@@ -10,7 +10,7 @@ The project must be run in an application linked against `libharfbuzz` with the 
 
 **Usage** You may try out this project with the following steps:
 1. On a Linux system with X11 (WSL is fine), run `GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/hsfzxjy/handwriter.ttf`;
-2. In directory `handwriter.ttf`, run `make run`;
+2. In directory `handwriter.ttf`, run `make run`, which fetches Docker image `hsfzxjy/harfbuzz-wasm-handwriting-synthesis` and starts the `gedit` application inside;
 3. Start typing in the pop-up gedit window. Each line should prefixed by `#` to trigger the shaper, e.g., typing `#hello world`.
 
 Some strokes might look cursed due to the limitation of the model, appending a space ` ` should make it better.
