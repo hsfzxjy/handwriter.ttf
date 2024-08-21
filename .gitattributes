@@ -1,0 +1,2 @@
+weights/synthesis_network_52.onnx filter=lfs diff=lfs merge=lfs -text
+weights/synthesis_network_52.rten filter=lfs diff=lfs merge=lfs -text
