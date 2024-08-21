@@ -13,6 +13,8 @@ During the hype of [llama.ttf](https://github.com/fuglede/llama.ttf) months ago,
 
 Some strokes might look cursed due to the limitation of the model, appending a space ` ` should make it better.
 
+<p align=center><a href="https://youtu.be/IjObhagKnY8">Watch on Youtube</a></p>
+
 https://github.com/user-attachments/assets/ea5e1b61-fcb3-4950-8621-af2499c96493
 
 ## Technical Details
