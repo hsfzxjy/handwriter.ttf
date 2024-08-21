@@ -6,6 +6,8 @@
 
 During the hype of [llama.ttf](https://github.com/fuglede/llama.ttf) months ago, I was speculating the potential of WASM shaper for even crazier purpose, one that fitter to a font shaper's duty -- to synthesize font at runtime. This project as proof-of-concept implements a synthesizer that generates and rasterizes handwriting-style font, backed by [a super-lightweight RNN model](https://github.com/X-rayLaser/pytorch-handwriting-synthesis-toolkit/blob/main/my-app/synthesis_network_52.onnx) (~14MiB).
 
+The project must be run in an application linked against `libharfbuzz` with the experimental WASM shaper enabled, which does not hold for any products currently. Considering that it's not easy to build such a library from scratch, I prebuilt a Docker image `hsfzxjy/harfbuzz-wasm-handwriting-synthesis` which contains both the TTF file and a modified version of `gedit`. 
+
 **Usage** You may try out this project with the following steps:
 1. On a Linux system with X11 (WSL is fine), run `GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/hsfzxjy/handwriter.ttf`;
 2. In directory `handwriter.ttf`, run `make run`;
