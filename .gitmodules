@@ -1,0 +1,6 @@
+[submodule "rten"]
+	path = rten
+	url = https://github.com/robertknight/rten.git
+[submodule "Harfbuzz-WASM-Fantasy"]
+	path = Harfbuzz-WASM-Fantasy
+	url = https://github.com/hsfzxjy/Harfbuzz-WASM-Fantasy
