@@ -4,7 +4,6 @@ mod nn;
 mod raster;
 mod tokenizer;
 mod utils;
-mod ziggurat_tables;
 
 use harfbuzz_wasm::{debug, Font, Glyph, GlyphBuffer};
 use wasm_bindgen::prelude::*;

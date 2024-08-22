@@ -13,17 +13,15 @@ default = ["console_error_panic_hook"]
 [dependencies]
 wasm-bindgen = "0.2.84"
 
-# The `console_error_panic_hook` crate provides better debugging of panics by
-# logging them with `console.error`. This is great for development, but requires
-# all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
-# code size when deploying.
+rand = { version = "0.8.5", features = ["small_rng"], default-features = false }
 console_error_panic_hook = { version = "0.1.7", optional = true }
 rten = { version = "0.12.0", features = [], path = "../rten" }
 rten-tensor = { version = "0.12.0", path = "../rten/rten-tensor" }
 tiny-rng = "0.2.0"
-getrandom = { version = "0.2.15", features = ["js"] }
+getrandom = { version = "0.2.15", features = ["custom"] }
 harfbuzz-wasm = { git = "https://github.com/harfbuzz/harfbuzz-wasm-examples.git", rev = "ec67ff4c1a7fdb815b5f624ef58d094ee9e56f97" }
 lru = "0.12.4"
+rand_distr = "0.4.3"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.34"

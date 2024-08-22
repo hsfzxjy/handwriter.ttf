@@ -4,10 +4,11 @@ use std::{
     sync::{Mutex, MutexGuard, OnceLock},
 };
 
+use rand::SeedableRng;
 use rten::Model;
 use rten_tensor::Layout;
 
-use crate::{io, myrand::MyRng, tokenizer};
+use crate::{io, tokenizer};
 
 struct ResultCache;
 type LRUCache = lru::LruCache<Vec<u8>, Vec<[f64; 3]>>;
@@ -59,14 +60,18 @@ fn load_model() -> &'static Model {
 
 pub struct Generator {
     model: &'static rten::Model,
-    rng: MyRng,
+    rng: rand::rngs::SmallRng,
 }
 
 impl Generator {
     pub fn new() -> Self {
         Self {
             model: load_model(),
-            rng: MyRng::new(),
+            rng: rand::rngs::SmallRng::from_seed({
+                let mut seed = <rand::rngs::SmallRng as SeedableRng>::Seed::default();
+                seed.fill(42);
+                seed
+            }),
         }
     }
     pub fn generate_for(&mut self, text: &[u8]) -> Vec<[f64; 3]> {

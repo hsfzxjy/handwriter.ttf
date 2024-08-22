@@ -1,15 +1,12 @@
 use rten::InputOrOutput;
 use rten_tensor::{self as rtt, AsView, Layout};
-use std::{ops::Sub, sync::OnceLock};
-
-use crate::myrand::{self, Distribution, MyRng, WeightedIndex};
+use std::sync::OnceLock;
 
 trait ViewData<T> {
     fn view_data(&self) -> &[T];
 }
 
 impl<'a> ViewData<f32> for InputOrOutput<'a> {
-    #[inline]
     fn view_data(&self) -> &[f32] {
         use rten::Input::*;
         match self.as_input() {
@@ -165,18 +162,17 @@ impl Output {
             phi,
         }
     }
-    pub fn sample_next_point(&self, rng: &mut MyRng) -> [f64; 3] {
+    pub fn sample_next_point(&self, rng: &mut rand::rngs::SmallRng) -> [f64; 3] {
+        use rand::distributions::weighted::WeightedIndex;
+        use rand::distributions::Distribution;
         let num_components = self.pi.size(0);
-        let component = WeightedIndex::new(self.pi.view_data().to_owned())
-            .sample(rng)
-            .sub(1)
-            .clamp(0, num_components - 1);
+        let component = WeightedIndex::new(self.pi.view_data()).unwrap().sample(rng);
         let mu1 = self.mu.view_data()[component];
         let mu2 = self.mu.view_data()[component + num_components];
         let sd1 = self.sd.view_data()[component];
         let sd2 = self.sd.view_data()[component + num_components];
         let ro = self.ro.view_data()[component];
-        let sample = myrand::Bv2dNormal {
+        let sample = crate::myrand::Bv2dNormal {
             mu: [mu1 as f64, mu2 as f64],
             sigma: [sd1 as f64, sd2 as f64],
             ro: ro as f64,
